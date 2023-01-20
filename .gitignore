@@ -1,0 +1,15 @@
+parser/venv
+parser/test.log
+parser/.vscode/settings.json
+parser/__pycache__/config.cpython-310.pyc
+parser/__pycache__/items.cpython-310.pyc
+parser/__pycache__/spiders.cpython-310.pyc
+parser/db/__pycache__/connection.cpython-310.pyc
+parser/db/__pycache__/models.cpython-310.pyc
+parser/drivers/chromedriver.exe
+parser/source/__pycache__/items.cpython-310.pyc
+parser/source/__pycache__/main.cpython-310.pyc
+parser/source/__pycache__/parsers.cpython-310.pyc
+parser/source/__pycache__/selenium_request.cpython-310.pyc
+parser/views/__pycache__/weather_reguest.cpython-310.pyc
+parser/source/unused/spiders.py

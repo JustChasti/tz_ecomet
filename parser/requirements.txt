@@ -1,0 +1,7 @@
+scrapy
+loguru
+selenium
+psycopg2-binary
+sqlalchemy
+fastapi
+uvicorn
