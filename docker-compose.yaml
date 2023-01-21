@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:15.1
+    environment:
+      POSTGRES_DB: "ecometbase"
+      POSTGRES_USER: "gray"
+      POSTGRES_PASSWORD: "qm7hFSIW"
+    ports:
+      - "5432:5432"
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    hostname: chrome
+    privileged: true
+    shm_size: 2g
+
+  parser:
+    build:
+      context: .
+      dockerfile: parser/Dockerfile
+    image: parser
+    container_name: parser
+    env_file:
+      - parser/.env
+    restart: always
+    tty: True
+    working_dir: /parser
+    ports:
+      - 5000:5000

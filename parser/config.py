@@ -2,22 +2,9 @@ import os
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-docker = False
-
-# selenium configuration
-
-if docker:
-    pass
-
-else:
-    options = Options()
-    options.headless = True
-
-    driver = webdriver.Chrome(
-        'D:/code/tz_ecomet/parser/drivers/chromedriver.exe',
-        options=options
-    )
+docker = True
 
 # db configuration
 if docker:

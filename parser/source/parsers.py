@@ -44,15 +44,16 @@ def insert_data(city: CityItem):
         logger.info('City {city_id} data updated')
 
 
-@default_decorator('error in finding city')
+# @default_decorator('error in finding city')
 def add_city(name):
     html_file = f'temp/find_{name}.html'
+    city = {
+        'name': name,
+        'id': 0
+    }
     with open(html_file, 'r', encoding='utf-8-sig', newline='') as f:
         page = f.read()
         data = Selector(text=str(page))
-        city = {
-            'name': name
-        }
         table = data.css('.table')
         if not table:
             city['id'] = 0

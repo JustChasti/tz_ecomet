@@ -4,12 +4,19 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from loguru import logger
 
-from config import driver
 from decorators import default_decorator
+
+from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def get_city_html(db_id, ow_id):
+    driver = webdriver.Remote(
+        command_executor='http://chrome:4444/wd/hub',
+        desired_capabilities=DesiredCapabilities.CHROME
+    )
     url = f'https://openweathermap.org/city/{ow_id}'
     data = driver.get(url)
     element = WebDriverWait(driver=driver, timeout=10).until(
@@ -24,6 +31,11 @@ def get_city_html(db_id, ow_id):
 
 @default_decorator('Finding city with selenium error')
 def find_city(name):
+    driver = webdriver.Remote(
+        command_executor='http://chrome:4444/wd/hub',
+        desired_capabilities=DesiredCapabilities.CHROME
+    )
+    logger.info('func stated')
     url = f'https://openweathermap.org/find?q={name}'
     data = driver.get(url)
     element = WebDriverWait(driver=driver, timeout=10).until(

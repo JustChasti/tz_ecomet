@@ -20,3 +20,4 @@ api/__pycache__/config.cpython-310.pyc
 api/views/__pycache__/statistic.cpython-310.pyc
 api/views/__pycache__/cities.cpython-310.pyc
 api/.vscode/settings.json
+parser/.env
