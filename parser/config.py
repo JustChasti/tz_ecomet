@@ -35,7 +35,7 @@ else:
     base_port = '5432'
 
 # basic configuration
-delay = 10
+delay = 60
 
 if docker:
     my_host = '0.0.0.0'

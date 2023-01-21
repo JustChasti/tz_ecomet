@@ -13,3 +13,5 @@ parser/source/__pycache__/parsers.cpython-310.pyc
 parser/source/__pycache__/selenium_request.cpython-310.pyc
 parser/views/__pycache__/weather_reguest.cpython-310.pyc
 parser/source/unused/spiders.py
+parser/__pycache__/decorators.cpython-310.pyc
+parser/views/__pycache__/models.cpython-310.pyc

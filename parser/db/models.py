@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -9,6 +9,7 @@ class City(Base):
     __tablename__ = "cities"
     id = Column(Integer, primary_key=True, index=True)
     ow_id = Column(Integer)
+    name = String(length=64)
 
 
 class Data(Base):
