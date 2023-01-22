@@ -1,3 +1,6 @@
 fastapi
 loguru
 uvicorn
+requests
+psycopg2-binary
+sqlalchemy

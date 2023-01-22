@@ -9,7 +9,6 @@ city_router = APIRouter()
 
 @city_router.post('/city/find', response_class=JSONResponse)
 async def find_city(city: CityModel):
-
     return {
         'info': f'city {city.name} exist',
         'name': city.name,

@@ -1,9 +1,8 @@
-docker = False
+docker = True
 # basic configuration
 
-if docker:
-    my_host = '0.0.0.0'
-else:
-    my_host = '127.0.0.1'
+parser_host = 'http://parser:5000'
+
+my_host = '0.0.0.0'
 
 test_mode = True
