@@ -9,7 +9,7 @@ class City(Base):
     __tablename__ = "cities"
     id = Column(Integer, primary_key=True, index=True)
     ow_id = Column(Integer)
-    name = String(length=64)
+    name = Column(String(64))
 
 
 class Data(Base):

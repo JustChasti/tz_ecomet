@@ -41,7 +41,7 @@ def insert_data(city: CityItem):
     session.commit()
     session.close()
     if test_mode:
-        logger.info('City {city_id} data updated')
+        logger.info(f"City {city['city_id']} data updated")
 
 
 # @default_decorator('error in finding city')
