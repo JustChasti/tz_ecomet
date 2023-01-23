@@ -7,6 +7,7 @@ Base = declarative_base()
 
 
 class City(Base):
+    # Модель для города
     __tablename__ = "cities"
     id = Column(Integer, primary_key=True, index=True)
     ow_id = Column(Integer)
@@ -14,6 +15,7 @@ class City(Base):
 
 
 class Data(Base):
+    # Модель для статистики
     __tablename__ = "data"
     id = Column(Integer, primary_key=True, index=True)
     city_id = Column(Integer, ForeignKey("cities.id"))

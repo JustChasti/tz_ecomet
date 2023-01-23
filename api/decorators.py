@@ -1,6 +1,8 @@
 from loguru import logger
 
 
+# этот декоратор использую, чтобы избежать 500 в случае чего
+
 def default_decorator(errormessage):
     def iternal_decorator(function):
         def wrapper(*args, **kwargs):

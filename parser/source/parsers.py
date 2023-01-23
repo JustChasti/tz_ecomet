@@ -14,6 +14,7 @@ from decorators import default_decorator
 
 @default_decorator('error in geting page and parsing items')
 async def get_item(db_id, ow_id):
+    # получаю данные по городу с html страницы
     city = CityItem()
     get_city_html(db_id, ow_id)
     html_file = f"temp/{db_id}.html"
@@ -31,6 +32,7 @@ async def get_item(db_id, ow_id):
 
 @default_decorator('error in insertion items')
 def insert_data(city: CityItem):
+    # вставляю данные в базу по городу
     session = Session()
     data = Data(
         city_id=city['city_id'],
@@ -46,8 +48,9 @@ def insert_data(city: CityItem):
         logger.info(f"City {city['city_id']} data updated")
 
 
-# @default_decorator('error in finding city')
+@default_decorator('error in finding city')
 def add_city(name):
+    # проверяю есть ли город на странице, если он есть, то получаю его id, указанный на сайте
     html_file = f'temp/find_{name}.html'
     city = {
         'name': name,

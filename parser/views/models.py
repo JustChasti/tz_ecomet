@@ -8,11 +8,14 @@ from config import test_mode
 
 
 class CityModel(BaseModel):
+    # модель для поиска города
+
     name: constr(max_length=64)
     ow_id = 0
 
     @validator('ow_id')
     def check_exist(cls, ow_id, values):
+        # проверяю сущетсвует ли город на сайте, если нет, то вызываю ошибку
         if test_mode:
             logger.info('check existintg')
         find_city(values['name'])

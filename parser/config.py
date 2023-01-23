@@ -1,10 +1,9 @@
 import os
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 docker = True
+
+# изначально сервис работал вне докера, настройки для этого я решил оставить
+# на случай каких-либо измений или желания просмотра базы через pgadmin
 
 # db configuration
 if docker:
@@ -29,4 +28,4 @@ if docker:
 else:
     my_host = '127.0.0.1'
 
-test_mode = True
+test_mode = False  # если включен идет запись в логи доп информации

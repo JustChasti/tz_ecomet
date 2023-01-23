@@ -13,6 +13,7 @@ from db.models import Base
 
 # в целом стандартное подключение к постгресу
 # создаю таблицы и конекчусь
+# делаю через цикл, если api запустится раньше postgres
 
 connect_data = {
     'drivername': 'postgresql+psycopg2',

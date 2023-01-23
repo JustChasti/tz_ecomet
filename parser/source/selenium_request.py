@@ -12,7 +12,11 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
+# загружаю js страницы и сохраняюю ее для последующего парсинга через scrapy
+
+
 def get_city_html(db_id, ow_id):
+    # загружаю станицу города
     driver = webdriver.Remote(
         command_executor='http://chrome:4444/wd/hub',
         desired_capabilities=DesiredCapabilities.CHROME
@@ -31,11 +35,11 @@ def get_city_html(db_id, ow_id):
 
 @default_decorator('Finding city with selenium error')
 def find_city(name):
+    # загружаю страницу поиска городов
     driver = webdriver.Remote(
         command_executor='http://chrome:4444/wd/hub',
         desired_capabilities=DesiredCapabilities.CHROME
     )
-    logger.info('func stated')
     url = f'https://openweathermap.org/find?q={name}'
     data = driver.get(url)
     element = WebDriverWait(driver=driver, timeout=10).until(

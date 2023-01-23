@@ -6,6 +6,7 @@ import asyncio
 
 
 def get_pages():
+    # ассинхронно обновляю информацию по каждому городу
     session = Session()
     cities = session.query(City).all()
     for i in cities:

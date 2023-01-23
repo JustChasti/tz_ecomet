@@ -3,11 +3,11 @@ import os
 
 # basic configuration
 
-parser_host = 'http://parser:5000'
+parser_host = 'http://parser:5000'  # хост парсера
 
 my_host = '0.0.0.0'
 
-test_mode = True
+test_mode = False
 
 # db cofiguration
 base_user = os.getenv('BASE_USER')

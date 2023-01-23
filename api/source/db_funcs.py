@@ -4,8 +4,15 @@ from loguru import logger
 from decorators import default_decorator
 
 
+"""
+В этом файле объединены функции, которые предполагают работу с базой
+как для работы с городами, так и со статистикой
+"""
+
+
 @default_decorator('error in finding city')
 def find_city(name:str) -> bool:
+    # проверка существования города в базе
     session = Session()
     city = session.query(City).filter_by(name=name).all()
     session.close()
@@ -18,6 +25,7 @@ def find_city(name:str) -> bool:
 
 @default_decorator('error in adding city to db')
 def add_city_to_db(name, ow_id):
+    # добавление в базу города
     session = Session()
     city = City(
         name=name,
@@ -30,6 +38,7 @@ def add_city_to_db(name, ow_id):
 
 @default_decorator('cant get data with this input')
 def get_unsorted_data():
+    # получаю последние данные, без сортировки даты по городу
     session = Session()
     data = []
     for i in session.query(City).all():
@@ -40,10 +49,7 @@ def get_unsorted_data():
         data.append({
             'city': city['name'],
             'data':{
-                'temperature': obj['temperature'],
-                'wind_speed': obj['wind_speed'],
-                'pressure': obj['pressure'],
-                'dt': obj['created_date']
+                'temperature': obj['temperature']
             }
         })
     return data
@@ -51,6 +57,9 @@ def get_unsorted_data():
 
 @default_decorator('cant get data with this input')
 def get_sorted_data(name):
+    # получаю последние данные по частичному совпадению запроса и названия города
+    # если есть какие-то совпадения, например есть город Москва, а в запросе есть мос
+    # то такие данные сортируются к началу списка, аналогично поиску в браузере
     name = name.capitalize()
     session = Session()
     data = []
@@ -74,10 +83,7 @@ def get_sorted_data(name):
         data.append({
             'city': i['name'],
             'data':{
-                'temperature': obj['temperature'],
-                'wind_speed': obj['wind_speed'],
-                'pressure': obj['pressure'],
-                'dt': obj['created_date']
+                'temperature': obj['temperature']
             }
         })
     return data
@@ -85,6 +91,7 @@ def get_sorted_data(name):
 
 @default_decorator('cant get data with this input')
 def get_data_period(name, start, end):
+    # получение данных за определенный период
     session = Session()
     city = session.query(City).filter_by(name=name).first()
     objects = session.query(Data).filter_by(city_id=city.id).filter(Data.created_date.between(start, end)).all()
