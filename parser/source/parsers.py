@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from scrapy import Selector
 from loguru import logger
@@ -35,7 +36,8 @@ def insert_data(city: CityItem):
         city_id=city['city_id'],
         temperature=int(city['temperature'].split('°')[0]),
         wind_speed=float(city['wind_speed'].split('m/s')[0]),
-        pressure=int(city['pressure'].split('h')[0])
+        pressure=int(city['pressure'].split('h')[0]),
+        created_date=datetime.now()
     )
     session.add(data)
     session.commit()

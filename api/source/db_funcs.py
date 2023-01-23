@@ -1,8 +1,10 @@
 from db.connection import Session
 from db.models import City, Data
 from loguru import logger
+from decorators import default_decorator
 
 
+@default_decorator('error in finding city')
 def find_city(name:str) -> bool:
     session = Session()
     city = session.query(City).filter_by(name=name).all()
@@ -14,6 +16,7 @@ def find_city(name:str) -> bool:
         return False
 
 
+@default_decorator('error in adding city to db')
 def add_city_to_db(name, ow_id):
     session = Session()
     city = City(
@@ -25,12 +28,13 @@ def add_city_to_db(name, ow_id):
     session.close()
 
 
+@default_decorator('cant get data with this input')
 def get_unsorted_data():
     session = Session()
     data = []
     for i in session.query(City).all():
         city = i.__dict__
-        obj = session.query(Data).filter_by(city_id=city['id']).order_by(Data.id.desc()).first()
+        obj = session.query(Data).filter_by(city_id=city['id']).order_by(Data.created_date.desc()).first()
         obj = obj.__dict__
         logger.info(obj)
         data.append({
@@ -38,12 +42,14 @@ def get_unsorted_data():
             'data':{
                 'temperature': obj['temperature'],
                 'wind_speed': obj['wind_speed'],
-                'pressure': obj['pressure']
+                'pressure': obj['pressure'],
+                'dt': obj['created_date']
             }
         })
     return data
 
 
+@default_decorator('cant get data with this input')
 def get_sorted_data(name):
     name = name.capitalize()
     session = Session()
@@ -63,14 +69,35 @@ def get_sorted_data(name):
     matched.extend(cities)
 
     for i in matched:
-        obj = session.query(Data).filter_by(city_id=i['id']).order_by(Data.id.desc()).first()
+        obj = session.query(Data).filter_by(city_id=i['id']).order_by(Data.created_date.desc()).first()
         obj = obj.__dict__
         data.append({
             'city': i['name'],
             'data':{
                 'temperature': obj['temperature'],
                 'wind_speed': obj['wind_speed'],
-                'pressure': obj['pressure']
+                'pressure': obj['pressure'],
+                'dt': obj['created_date']
+            }
+        })
+    return data
+
+
+@default_decorator('cant get data with this input')
+def get_data_period(name, start, end):
+    session = Session()
+    city = session.query(City).filter_by(name=name).first()
+    objects = session.query(Data).filter_by(city_id=city.id).filter(Data.created_date.between(start, end)).all()
+    data = []
+    for i in objects:
+        obj = i.__dict__
+        data.append({
+            'city': name,
+            'data':{
+                'temperature': obj['temperature'],
+                'wind_speed': obj['wind_speed'],
+                'pressure': obj['pressure'],
+                'dt': obj['created_date']
             }
         })
     return data

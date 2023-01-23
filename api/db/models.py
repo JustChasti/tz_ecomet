@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+import datetime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 
@@ -19,3 +20,4 @@ class Data(Base):
     temperature = Column(Integer)
     wind_speed = Column(Integer)
     pressure = Column(Integer)
+    created_date = Column(DateTime, default=datetime.datetime.now())
