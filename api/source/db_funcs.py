@@ -89,13 +89,21 @@ def get_sorted_data(name):
 
 @default_decorator('cant get data with this input')
 def get_data_period(name, start, end):
-    # получение данных за определенный период
+    # получение данных за определенный период и посчет средних значений
     session = Session()
     city = session.query(City).filter_by(name=name).first()
     objects = session.query(Data).filter_by(city_id=city.id).filter(Data.created_date.between(start, end)).all()
     data = []
+    average = {
+        'temperature': 0,
+        'wind_speed': 0,
+        'pressure': 0
+    }
     for i in objects:
         obj = i.__dict__
+        average['pressure'] += obj['pressure']
+        average['wind_speed'] += obj['wind_speed']
+        average['temperature'] += obj['temperature']
         data.append({
             'city': name,
             'data':{
@@ -105,4 +113,14 @@ def get_data_period(name, start, end):
                 'dt': obj['created_date']
             }
         })
-    return data
+    average['pressure'] /= len(objects)
+    average['wind_speed'] /= len(objects)
+    average['temperature'] /= len(objects)
+    average_data = [{
+        'city': f'{name} - average',
+        'data': average
+    }]
+    print(average_data)
+    print(data)
+    average_data.extend(data)
+    return average_data
