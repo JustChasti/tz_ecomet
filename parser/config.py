@@ -21,7 +21,7 @@ else:
     base_port = '5432'
 
 # basic configuration
-delay = 60
+delay = 60 # задержка для получения данных о городах
 
 if docker:
     my_host = '0.0.0.0'

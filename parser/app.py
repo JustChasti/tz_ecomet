@@ -30,6 +30,7 @@ def parser():
 
 @app.on_event("startup")
 async def main():
+    # при запуске приложения стартует фоновый поток для ежеминутной обработки данных
     daemon = Thread(target=parser)
     daemon.start()
 
