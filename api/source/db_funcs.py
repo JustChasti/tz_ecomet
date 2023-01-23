@@ -16,7 +16,6 @@ def find_city(name:str) -> bool:
     session = Session()
     city = session.query(City).filter_by(name=name).all()
     session.close()
-    logger.info(city)
     if city:
         return True
     else:
@@ -45,7 +44,6 @@ def get_unsorted_data():
         city = i.__dict__
         obj = session.query(Data).filter_by(city_id=city['id']).order_by(Data.created_date.desc()).first()
         obj = obj.__dict__
-        logger.info(obj)
         data.append({
             'city': city['name'],
             'data':{

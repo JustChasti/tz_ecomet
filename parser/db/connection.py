@@ -11,6 +11,14 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from config import base_host, base_name, base_pass, base_port, base_user
 from db.models import Base
 
+
+"""
+Почему postgres:
+- бесплатная
+- открытый исходный код
+- достаточно мощная
+"""
+
 # в целом стандартное подключение к постгресу
 # создаю таблицы и конекчусь
 # делаю через цикл, если api запустится раньше postgres
